@@ -49,9 +49,36 @@ echo ""
 echo "How's the project going? (Press Enter to skip)"
 read -r status_update
 
-# Save status to file
+# Save status to JSON file
 if [ ! -z "$status_update" ]; then
-    echo "$(date): $status_update" >> "${projectPath}/vindex_status.log"
+    # Create JSON entry
+    timestamp=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
+    json_entry="{\\"timestamp\\": \\"$timestamp\\", \\"status\\": \\"$status_update\\"}"
+    
+    # Read existing JSON or create new array
+    if [ -f "${projectPath}/vindex_status.json" ]; then
+        # Read existing file and add new entry
+        python3 -c "
+import json
+import sys
+try:
+    with open('${projectPath}/vindex_status.json', 'r') as f:
+        data = json.load(f)
+except:
+    data = []
+data.append($json_entry)
+with open('${projectPath}/vindex_status.json', 'w') as f:
+    json.dump(data, f, indent=2)
+"
+    else
+        # Create new file with first entry
+        python3 -c "
+import json
+data = [$json_entry]
+with open('${projectPath}/vindex_status.json', 'w') as f:
+    json.dump(data, f, indent=2)
+"
+    fi
     echo "✅ Thanks!"
 fi
 
@@ -83,9 +110,10 @@ read -n 1
 
   async getProjectStatus(projectPath) {
     try {
-      const statusLogPath = path.join(projectPath, 'vindex_status.log');
-      const statusLog = await fs.readFile(statusLogPath, 'utf8');
-      return statusLog.split('\n').filter(line => line.trim()).slice(-5); // Last 5 entries
+      const statusLogPath = path.join(projectPath, 'vindex_status.json');
+      const statusData = await fs.readFile(statusLogPath, 'utf8');
+      const statusArray = JSON.parse(statusData);
+      return statusArray.slice(-5); // Last 5 entries
     } catch (error) {
       return [];
     }
@@ -93,11 +121,28 @@ read -n 1
 
   async saveStatusUpdate(projectPath, status) {
     try {
-      const statusLogPath = path.join(projectPath, 'vindex_status.log');
+      const statusLogPath = path.join(projectPath, 'vindex_status.json');
       const timestamp = new Date().toISOString();
-      const statusEntry = `${timestamp}: ${status}\n`;
+      const statusEntry = {
+        timestamp: timestamp,
+        status: status
+      };
       
-      await fs.appendFile(statusLogPath, statusEntry, 'utf8');
+      // Read existing data or create new array
+      let statusArray = [];
+      try {
+        const existingData = await fs.readFile(statusLogPath, 'utf8');
+        statusArray = JSON.parse(existingData);
+      } catch (readError) {
+        // File doesn't exist or is empty, start with empty array
+        statusArray = [];
+      }
+      
+      // Add new entry
+      statusArray.push(statusEntry);
+      
+      // Write back to file
+      await fs.writeFile(statusLogPath, JSON.stringify(statusArray, null, 2), 'utf8');
       return true;
     } catch (error) {
       console.error('Failed to save status:', error.message);

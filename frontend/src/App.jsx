@@ -14,7 +14,7 @@ function App() {
   }
 
   const TerminalBox = ({ command, commandName, children }) => (
-    <div className="relative bg-gray-900 rounded-lg p-4 font-mono text-sm">
+    <div className="relative bg-gray-900 rounded-lg p-4 font-mono text-sm terminal-box">
       <button
         onClick={() => copyToClipboard(command, commandName)}
         className="absolute top-2 right-2 text-gray-400 hover:text-white transition-colors duration-200"
@@ -22,7 +22,7 @@ function App() {
         {copiedCommand === commandName ? (
           <span className="text-green-400">✓</span>
         ) : (
-          <span>📋</span>
+          <span><svg viewBox="0 -0.5 25 25" className="h-[2em]" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path ffffffill-rule="evenodd" clip-rule="evenodd" d="M8.94605 4.99995L13.2541 4.99995C14.173 5.00498 15.0524 5.37487 15.6986 6.02825C16.3449 6.68163 16.7051 7.56497 16.7001 8.48395V12.716C16.7051 13.6349 16.3449 14.5183 15.6986 15.1717C15.0524 15.825 14.173 16.1949 13.2541 16.2H8.94605C8.02707 16.1949 7.14773 15.825 6.50148 15.1717C5.85522 14.5183 5.495 13.6349 5.50005 12.716L5.50005 8.48495C5.49473 7.5658 5.85484 6.6822 6.50112 6.0286C7.1474 5.375 8.0269 5.00498 8.94605 4.99995Z" stroke="ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.1671 19H14.9371C17.4857 18.9709 19.5284 16.8816 19.5001 14.333V9.666" stroke="ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></span>
         )}
       </button>
       <div className="text-green-400 mb-2">$ {children}</div>
@@ -49,18 +49,11 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-[10vw]">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <pre className="text-6xl md:text-8xl font-mono text-gray-800 leading-none">
-{`╔══════════════════════════════════════════════════════════════╗
-║  ██╗   ██╗██╗███╗   ██╗██████╗ ███████╗██╗  ██╗            ║
-║  ██║   ██║██║████╗  ██║██╔══██╗██╔════╝██║ ██╔╝            ║
-║  ██║   ██║██║██╔██╗ ██║██║  ██║█████╗  █████╔╝             ║
-║  ╚██╗ ██╔╝██║██║╚██╗██║██║  ██║██╔══╝  ██╔═██╗             ║
-║   ╚████╔╝ ██║██║ ╚████║██████╔╝███████╗██║  ██╗            ║
-║    ╚═══╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝            ║
-╚══════════════════════════════════════════════════════════════╝`}
+{`VINDEX`}
             </pre>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
@@ -82,7 +75,7 @@ function App() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-[10vw] bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16">
             How It Works
@@ -108,7 +101,7 @@ function App() {
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
               <div className="flex-1">
                 <div className="flex items-center mb-4">
                   <span className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4">2</span>
