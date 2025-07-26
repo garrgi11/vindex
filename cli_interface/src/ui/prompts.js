@@ -72,4 +72,22 @@ export class PromptManager {
 
     return openInVSCode;
   }
+
+  async askForStatusAction(projectPath, projectName) {
+    const { action } = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'action',
+        message: chalk.cyan(`📊 What would you like to do with ${projectName}?`),
+        choices: [
+          { name: '📝 View project status history', value: 'view_status' },
+          { name: '🔔 Trigger status check now', value: 'trigger_check' },
+          { name: '✅ Continue', value: 'continue' }
+        ],
+        default: 'continue'
+      }
+    ]);
+
+    return action;
+  }
 } 

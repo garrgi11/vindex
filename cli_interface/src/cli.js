@@ -65,7 +65,23 @@ export class VindexCLI {
       const shouldOpenVSCode = await this.prompts.askToOpenInVSCode();
       
       if (shouldOpenVSCode) {
-        await this.display.openInVSCode(topProject.path);
+        await this.display.openInVSCode(topProject.path, topProject.name);
+        
+        // Ask if user wants to do anything with status
+        const statusAction = await this.prompts.askForStatusAction(topProject.path, topProject.name);
+        
+        switch (statusAction) {
+          case 'view_status':
+            await this.display.showProjectStatus(topProject.path, topProject.name);
+            break;
+          case 'trigger_check':
+            await this.display.triggerStatusCheck(topProject.path, topProject.name);
+            break;
+          case 'continue':
+          default:
+            console.log(chalk.gray('✨ Happy coding!'));
+            break;
+        }
       }
       
     } catch (error) {

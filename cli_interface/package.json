@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "demo": "node index.js --demo"
+    "demo": "node index.js --demo",
+    "test": "node -e \"import('./src/core/status-checker.js').then(m => console.log('✅ Status checker module loaded successfully'))\""
   },
   "keywords": ["cli", "productivity", "project-management", "prioritization"],
   "author": "Vindex Team",

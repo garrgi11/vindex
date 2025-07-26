@@ -3,10 +3,15 @@ import boxen from 'boxen';
 import ora from 'ora';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { StatusChecker } from '../core/status-checker.js';
 
 const execAsync = promisify(exec);
 
 export class DisplayManager {
+  constructor() {
+    this.statusChecker = new StatusChecker();
+  }
+
   showSuccess(message) {
     console.log(chalk.green('✅ ' + message));
   }
@@ -202,14 +207,43 @@ export class DisplayManager {
     return '🤔';
   }
 
-  async openInVSCode(projectPath) {
+  async openInVSCode(projectPath, projectName = 'Project') {
     try {
       console.log(chalk.cyan('🚀 Opening project in VSCode...'));
       await execAsync(`code "${projectPath}"`);
       this.showSuccess('✅ Project opened in VSCode!');
+      
+      // Schedule status check for 30 seconds
+      await this.statusChecker.scheduleStatusCheck(projectPath, projectName);
+      
     } catch (error) {
       this.showError('❌ Failed to open VSCode. Make sure VSCode is installed and the "code" command is available in your PATH.');
       console.log(chalk.gray('💡 You can manually open the project by running: code "' + projectPath + '"'));
     }
+  }
+
+  async showProjectStatus(projectPath, projectName) {
+    const statusEntries = await this.statusChecker.getProjectStatus(projectPath);
+    
+    if (statusEntries.length === 0) {
+      console.log(chalk.gray('📝 No status updates found for this project.'));
+      return;
+    }
+
+    console.log(chalk.cyan.bold(`\n📊 Status History for ${projectName}:\n`));
+    
+    statusEntries.forEach((entry, index) => {
+      const [timestamp, ...statusParts] = entry.split(': ');
+      const status = statusParts.join(': ');
+      const date = new Date(timestamp).toLocaleString();
+      
+      console.log(chalk.gray(`${date}:`));
+      console.log(chalk.white(`  ${status}\n`));
+    });
+  }
+
+  async triggerStatusCheck(projectPath, projectName) {
+    console.log(chalk.cyan('🔔 Triggering status check now...'));
+    await this.statusChecker.showStatusPopup(projectPath, projectName);
   }
 } 

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-07-26T20:51:37.708Z",
+  "timestamp": "2025-07-26T21:20:40.226Z",
   "projects": [
     {
       "name": "Task Management App",
@@ -9,9 +9,9 @@
       "progress": "Planning",
       "technology": "React + Node.js",
       "estimatedTime": "2 weeks",
-      "impact": "ferf",
-      "passion": "ergre",
-      "feasibility": "geregt"
+      "impact": "/Users/lakshkumar/Desktop/vindex/projectser",
+      "passion": "eert",
+      "feasibility": "eter"
     },
     {
       "name": "AI Chat Bot",
@@ -21,9 +21,9 @@
       "progress": "Research",
       "technology": "Python + FastAPI",
       "estimatedTime": "4 weeks",
-      "impact": "rtgrtg",
-      "passion": "grert",
-      "feasibility": "gretr"
+      "impact": "te",
+      "passion": "terte",
+      "feasibility": "rteter"
     },
     {
       "name": "Portfolio Website",
@@ -33,9 +33,9 @@
       "progress": "Design",
       "technology": "HTML + CSS + JavaScript",
       "estimatedTime": "1 week",
-      "impact": "rrt",
-      "passion": "rte",
-      "feasibility": "ertr"
+      "impact": "erte",
+      "passion": "teret",
+      "feasibility": "erte"
     }
   ]
 }

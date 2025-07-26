@@ -11,6 +11,7 @@ A beautiful CLI tool that helps developers choose the best project ideas by scor
 - 🌙 **Theme Support** - Dark and light mode options
 - 🎬 **Demo Mode** - Showcase the tool with pre-filled data
 - 💾 **Persistent Storage** - Ideas saved locally between sessions
+- 🔔 **Auto Status Checks** - Automatic terminal popup after 30 seconds for progress updates
 
 ## 🚀 Quick Start
 
@@ -44,6 +45,9 @@ vindex --dark
 
 # Use light theme
 vindex --light
+
+# Test status checker module
+npm test
 ```
 
 ## 🎯 How It Works
@@ -79,6 +83,13 @@ Get intelligent scheduling recommendations:
 - Target completion date
 - Motivational messages
 
+### 5. Auto Status Checks
+After opening a project in VSCode:
+- **10-second delay** - Gives you time to get started
+- **Clean terminal popup** - Simple "Hey, VINDEX here!" interface
+- **Progress tracking** - Save your updates automatically
+- **Minimal distraction** - Just asks how the project is going
+
 ## 🎨 CLI Features
 
 ### Beautiful Output
@@ -99,6 +110,15 @@ Get intelligent scheduling recommendations:
 - Rank emojis (🥇🥈🥉)
 - Status indicators
 - Motivational messages
+
+### 🔔 Status Check System
+- **Automatic popup** - Terminal window opens after 30 seconds
+- **Project context** - Shows current directory and git status
+- **Progress tracking** - Save status updates with timestamps
+- **File activity** - Displays recently modified files
+- **Color-coded interface** - Beautiful terminal UI with ANSI colors
+- **Status history** - View previous updates and progress
+- **Manual triggers** - Option to check status immediately
 
 ## 📊 Example Output
 
@@ -123,6 +143,26 @@ Suggested Start: Today!
 Target Completion: 12/15/2024
 
 🚀 Ready to ship!
+
+🔔 Status Check (30 seconds later):
+┌─────────────────────────────────────┐
+│ 🚀 Vindex Status Check              │
+│ ===================================== │
+│ Project: tweet-scheduler            │
+│ Time: Mon Dec 15 10:30:00 PST 2024  │
+│                                     │
+│ 📊 Git Status:                      │
+│ M  src/main.js                      │
+│ A  src/utils.js                     │
+│                                     │
+│ 📝 Recent Activity:                 │
+│ ./src/main.js                       │
+│ ./src/utils.js                      │
+│                                     │
+│ 💬 How's the project going?         │
+│ > Making good progress on the API   │
+│ ✅ Status saved!                    │
+└─────────────────────────────────────┘
 ```
 
 ## 🛠️ Technical Stack
@@ -187,6 +227,9 @@ cli_interface/
 - [ ] Advanced analytics and insights
 - [ ] Custom scoring algorithms
 - [ ] Calendar integration for timeboxing
+- [ ] Customizable status check intervals
+- [ ] Integration with time tracking tools
+- [ ] Slack/Discord notifications for status updates
 
 ## 🤝 Contributing
 
