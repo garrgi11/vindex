@@ -1,0 +1,65 @@
+import { SplashScreen } from './ui/splash.js';
+import { DirectoryScanner } from './core/directory-scanner.js';
+import { PromptManager } from './ui/prompts.js';
+import { DisplayManager } from './ui/display.js';
+import chalk from 'chalk';
+
+export class VindexCLI {
+  constructor() {
+    this.splash = new SplashScreen();
+    this.scanner = new DirectoryScanner();
+    this.prompts = new PromptManager();
+    this.display = new DisplayManager();
+  }
+
+  async run() {
+    try {
+      // Show splash screen
+      await this.splash.show();
+
+      // Ask for directory
+      const directory = await this.prompts.getDirectoryInput();
+      
+      // Scan directory for vindex_input.json files
+      const projects = await this.scanner.scanDirectory(directory);
+      
+      if (projects.length === 0) {
+        this.display.showWarning('No vindex_input.json files found in subdirectories.');
+        return;
+      }
+
+      // Collect scores for each project
+      const scoredProjects = [];
+      
+      for (const project of projects) {
+        console.log(chalk.cyan.bold(`\n📁 ${project.name}`));
+        this.display.showProjectBox(project);
+        
+        const scores = await this.prompts.getProjectScores(project.name);
+        
+        scoredProjects.push({
+          ...project,
+          ...scores
+        });
+      }
+
+      // Show loading animation and generate recommendations
+      console.log(chalk.cyan.bold('\n🎯 Analyzing your projects...\n'));
+      await this.display.showLoadingAnimation();
+      
+      // Show focus recommendations
+      this.display.showFocusRecommendations(scoredProjects);
+
+      // Save results
+      await this.scanner.saveResults(directory, scoredProjects);
+      
+      this.display.showSuccess('✅ Project scores saved successfully!');
+      
+    } catch (error) {
+      console.error('❌ An error occurred:', error.message);
+      process.exit(1);
+    }
+  }
+
+
+} 

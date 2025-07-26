@@ -1,0 +1,8 @@
+{
+  "name": "Task Management App",
+  "dateCreated": "2024-01-15",
+  "description": "A simple task management application with drag-and-drop functionality",
+  "progress": "Planning",
+  "technology": "React + Node.js",
+  "estimatedTime": "2 weeks"
+} 

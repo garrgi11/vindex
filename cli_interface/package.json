@@ -1,0 +1,32 @@
+{
+  "name": "vindex-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool to help developers choose the best project ideas",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "vindex": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "demo": "node index.js --demo"
+  },
+  "keywords": ["cli", "productivity", "project-management", "prioritization"],
+  "author": "Vindex Team",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^9.2.12",
+    "chalk": "^5.3.0",
+    "figlet": "^1.6.0",
+    "ora": "^7.0.1",
+    "blessed": "^0.1.81",
+    "terminal-kit": "^3.0.0",
+    "chalk-animation": "^2.0.3",
+    "gradient-string": "^2.0.2",
+    "boxen": "^7.1.1",
+    "conf": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+} 

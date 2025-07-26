@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-07-26T20:40:32.568Z",
+  "projects": [
+    {
+      "name": "Task Management App",
+      "path": "/Users/lakshkumar/Desktop/vindex/projects/project1",
+      "dateCreated": "2024-01-15",
+      "description": "A simple task management application with drag-and-drop functionality",
+      "progress": "Planning",
+      "technology": "React + Node.js",
+      "estimatedTime": "2 weeks",
+      "impact": "fef",
+      "passion": "fwfewfr",
+      "feasibility": "erfewrg"
+    },
+    {
+      "name": "AI Chat Bot",
+      "path": "/Users/lakshkumar/Desktop/vindex/projects/project2",
+      "dateCreated": "2024-01-20",
+      "description": "An intelligent chatbot using OpenAI API for customer support",
+      "progress": "Research",
+      "technology": "Python + FastAPI",
+      "estimatedTime": "4 weeks",
+      "impact": "egereg",
+      "passion": "retgewt",
+      "feasibility": "ertgewt"
+    },
+    {
+      "name": "Portfolio Website",
+      "path": "/Users/lakshkumar/Desktop/vindex/projects/project3",
+      "dateCreated": "2024-01-25",
+      "description": "A modern portfolio website with animations and responsive design",
+      "progress": "Design",
+      "technology": "HTML + CSS + JavaScript",
+      "estimatedTime": "1 week",
+      "impact": "treeer",
+      "passion": "ertew",
+      "feasibility": "erttew"
+    }
+  ]
+}

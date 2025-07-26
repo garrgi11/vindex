@@ -1,0 +1,8 @@
+{
+  "name": "AI Chat Bot",
+  "dateCreated": "2024-01-20",
+  "description": "An intelligent chatbot using OpenAI API for customer support",
+  "progress": "Research",
+  "technology": "Python + FastAPI",
+  "estimatedTime": "4 weeks"
+} 
