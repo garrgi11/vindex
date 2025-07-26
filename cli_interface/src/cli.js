@@ -55,6 +55,19 @@ export class VindexCLI {
       
       this.display.showSuccess('✅ Project scores saved successfully!');
       
+      // Ask if user wants to open the recommended project in VSCode
+      const topProject = scoredProjects.sort((a, b) => {
+        const aScore = this.display.analyzeText(a.impact) + this.display.analyzeText(a.passion) + this.display.analyzeText(a.feasibility);
+        const bScore = this.display.analyzeText(b.impact) + this.display.analyzeText(b.passion) + this.display.analyzeText(b.feasibility);
+        return bScore - aScore;
+      })[0];
+      
+      const shouldOpenVSCode = await this.prompts.askToOpenInVSCode();
+      
+      if (shouldOpenVSCode) {
+        await this.display.openInVSCode(topProject.path);
+      }
+      
     } catch (error) {
       console.error('❌ An error occurred:', error.message);
       process.exit(1);

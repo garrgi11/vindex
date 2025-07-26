@@ -1,6 +1,10 @@
 import chalk from 'chalk';
 import boxen from 'boxen';
 import ora from 'ora';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 export class DisplayManager {
   showSuccess(message) {
@@ -196,5 +200,16 @@ export class DisplayManager {
     if (score >= 6) return '⭐';
     if (score >= 4) return '👍';
     return '🤔';
+  }
+
+  async openInVSCode(projectPath) {
+    try {
+      console.log(chalk.cyan('🚀 Opening project in VSCode...'));
+      await execAsync(`code "${projectPath}"`);
+      this.showSuccess('✅ Project opened in VSCode!');
+    } catch (error) {
+      this.showError('❌ Failed to open VSCode. Make sure VSCode is installed and the "code" command is available in your PATH.');
+      console.log(chalk.gray('💡 You can manually open the project by running: code "' + projectPath + '"'));
+    }
   }
 } 

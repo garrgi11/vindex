@@ -59,4 +59,17 @@ export class PromptManager {
 
     return answers;
   }
+
+  async askToOpenInVSCode(projectPath) {
+    const { openInVSCode } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'openInVSCode',
+        message: chalk.cyan(`🚀 Would you like to open this project in VSCode?`),
+        default: true
+      }
+    ]);
+
+    return openInVSCode;
+  }
 } 
